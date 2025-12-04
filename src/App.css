@@ -1,9 +1,12 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 textarea {
   border: none;
+  color: white;
+  background-color: black;
   display: block;
   margin: 0 auto;
   width: 80%;
