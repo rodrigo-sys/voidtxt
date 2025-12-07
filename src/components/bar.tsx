@@ -1,13 +1,25 @@
+const styles = {
+  button: {
+    fontSize: '2.2em', fontWeight: 500
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: 60,
+    marginBottom: 10,
+    marginTop: 5,
+  }
+}
 
 function Bar() {
   return (
-    <div role='toolbar'>
-      <button>[scratch]</button>
-      <button>[save]</button>
-      <button>[new]</button>
-      <button>[list]</button>
-      <button>[upload bg]</button>
-      <button>[quit]</button>
+    <div style={styles.toolbar} role='toolbar'>
+      <button style={styles.button}>[scratch]</button>
+      <button style={styles.button}>[save]</button>
+      <button style={styles.button}>[new]</button>
+      <button style={styles.button}>[list]</button>
+      <button style={styles.button}>[upload bg]</button>
+      <button style={styles.button}>[quit]</button>
     </div>
   )
 }
