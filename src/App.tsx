@@ -1,16 +1,12 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Bar from "./components/bar";
+import Home from "./components/Home";
 
 function App() {
-  const sample_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna ---> aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-
   return (
-    <main >
-      <header>
-        <Bar />
-        <textarea>{sample_text}</textarea>
-      </header>
-    </main >
+    <Routes>
+      <Route path='/' element={<Home/>} />
+    </Routes>
   )
 }
 
