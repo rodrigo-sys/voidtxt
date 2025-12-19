@@ -1,4 +1,3 @@
-import Bar from "./bar";
 import NoteEditor from "./NoteEditor";
 
 export default function Home() {
@@ -7,7 +6,6 @@ export default function Home() {
   return (
     <main >
       <header>
-        <Bar/>
         <NoteEditor content={sample_text}/>
       </header>
     </main >
