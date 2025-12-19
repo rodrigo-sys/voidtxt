@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const styles = {
   button: {
     fontSize: '2.2em', fontWeight: 500
@@ -12,11 +14,17 @@ const styles = {
 }
 
 function Bar() {
+  const navigate = useNavigate()
+
+  function newNote() {
+    navigate('/note?content=')
+  }
+
   return (
     <div style={styles.toolbar} role='toolbar'>
       <button style={styles.button}>[scratch]</button>
       <button style={styles.button}>[save]</button>
-      <button style={styles.button}>[new]</button>
+      <button style={styles.button} onClick={newNote}>[new]</button>
       <button style={styles.button}>[list]</button>
       <button style={styles.button}>[upload bg]</button>
       <button style={styles.button}>[quit]</button>
