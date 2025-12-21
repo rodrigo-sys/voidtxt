@@ -1,10 +1,11 @@
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import { readTextFile } from "@tauri-apps/plugin-fs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { NoteContext, NoteContextType } from "../noteContext";
 
 type NoteEditorProps = { path?: string | null, content?: string | null }
 function NoteEditor(props: NoteEditorProps) {
-  const [content, setContent] = useState('');
+  const { content, setContent } = useContext(NoteContext) as NoteContextType;
 
   async function setContentFromFile() {
     const notes_path = await join(await appLocalDataDir(), 'notes');
@@ -18,7 +19,10 @@ function NoteEditor(props: NoteEditorProps) {
 
   return (
     <div>
-      <textarea defaultValue={content} />
+      <textarea
+        value={content}
+        onChange={(e) => { setContent(e.target.value) }}
+      />
     </div>
   );
 }
