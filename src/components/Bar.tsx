@@ -23,6 +23,7 @@ function Bar() {
 
   function newNote() {
     navigate('/note?content=')
+    noteContext?.setName('')
   }
 
   async function saveNote() {
