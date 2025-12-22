@@ -8,6 +8,7 @@
   "permissions": [
     "core:default",
     "opener:default",
+    "fs:allow-app-write-recursive",
     "fs:allow-read-text-file",
     {
       "identifier": "fs:scope",
