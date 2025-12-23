@@ -22,7 +22,7 @@ function Bar() {
   const noteContext = useContext(NoteContext);
 
   function newNote() {
-    navigate('/note?content=')
+    navigate('/note?path=&content=')
     noteContext?.setName('')
   }
 

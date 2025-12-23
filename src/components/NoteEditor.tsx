@@ -14,6 +14,7 @@ function NoteEditor(props: NoteEditorProps) {
 
   useEffect(() => {
     if (props.content) { setContent(props.content); return }
+    if (props.content == '') { setContent(''); return }
     if (props.path) { setContentFromFile() }
   }, [props.path, props.content])
 
