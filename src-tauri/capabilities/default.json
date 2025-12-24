@@ -9,7 +9,9 @@
     "core:default",
     "opener:default",
     "fs:allow-app-write-recursive",
+    "fs:allow-app-meta-recursive",
     "fs:allow-read-text-file",
+    "fs:allow-read-dir",
     {
       "identifier": "fs:scope",
       "allow": [

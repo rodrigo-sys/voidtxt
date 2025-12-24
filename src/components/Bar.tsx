@@ -42,12 +42,16 @@ function Bar() {
     await writeTextFile(note_path, content)
   }
 
+  function showNotesList() {
+    navigate('/notes')
+  }
+
   return (
     <div style={styles.toolbar} role='toolbar'>
       <button style={styles.button}>[scratch]</button>
       <button style={styles.button} onClick={saveNote}>[save]</button>
       <button style={styles.button} onClick={newNote}>[new]</button>
-      <button style={styles.button}>[list]</button>
+      <button style={styles.button} onClick={showNotesList}>[list]</button>
       <button style={styles.button}>[upload bg]</button>
       <button style={styles.button}>[quit]</button>
     </div>

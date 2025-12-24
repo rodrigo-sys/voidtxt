@@ -3,13 +3,15 @@ import "./App.css";
 import Home from "./components/Home";
 import NoteEditorPage from "./pages/NoteEditorPage";
 import RootLayout from "./pages/layouts/RootLayout";
+import { List } from "./components/List";
 
 function App() {
   return (
     <Routes>
-      <Route element={<RootLayout/>}>
+      <Route element={<RootLayout />}>
         <Route path='/' element={<Home />} />
         <Route path='/note' element={<NoteEditorPage />} />
+        <Route path='/notes' element={<List />} />
       </Route>
     </Routes>
   )
