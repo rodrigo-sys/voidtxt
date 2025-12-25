@@ -1,6 +1,6 @@
 import { DirEntry, readDir, stat } from "@tauri-apps/plugin-fs"
 import { join, appLocalDataDir } from "@tauri-apps/api/path"
-import { CSSProperties, Key, useEffect, useState } from "react"
+import { CSSProperties, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 export function List() {
@@ -40,10 +40,10 @@ export function List() {
   )
 }
 
-function NoteEntry({ key, entry, style }: { key: Key, entry: DirEntry, style?: CSSProperties }) {
+function NoteEntry({ entry, style }: { entry: DirEntry, style?: CSSProperties }) {
   const default_style = { fontSize: '30px', color: 'white', textDecoration: 'none' }
   return (
-    <div key={key}>
+    <div>
       <Link
         style={style || default_style}
         to={`/note?path=${entry.name}`}>{entry.name}</Link>
