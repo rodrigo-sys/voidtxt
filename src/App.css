@@ -18,7 +18,7 @@ body::before {
 textarea {
   border: none;
   color: white;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, var(--editor-bg-opacity, 0.7));
   display: block;
   margin: 0 auto;
   width: 80%;
