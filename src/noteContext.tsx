@@ -1,20 +1,30 @@
-import { createContext, useState, ReactNode } from "react";
+import { appLocalDataDir, join } from "@tauri-apps/api/path";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 type NoteContextType = {
-  name: string
+  fileName: string;
+  baseDir: string;
   content: string
-  setName: (name: string) => void;
+  setFileName: (name: string) => void;
   setContent: (content: string) => void;
+  setBaseDir: (baseDir: string) => void;
 }
 
 const NoteContext = createContext<NoteContextType | null>(null);
 
 function NoteProvider({ children }: { children: ReactNode }) {
-  const [name, setName] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [baseDir, setBaseDir] = useState('');
   const [content, setContent] = useState('');
 
+  useEffect(() => {
+    (async () => {
+      setBaseDir(await join(await appLocalDataDir(), 'notes'))
+    })()
+  }, [])
+
   return (
-    <NoteContext value={{ name, content, setName, setContent }}>
+    <NoteContext value={{ fileName, baseDir, content, setFileName, setBaseDir, setContent }}>
       {children}
     </NoteContext>
   )

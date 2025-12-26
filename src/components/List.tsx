@@ -46,7 +46,7 @@ function NoteEntry({ entry, style }: { entry: DirEntry, style?: CSSProperties })
     <div>
       <Link
         style={style || default_style}
-        to={`/note?path=${entry.name}`}>{entry.name}</Link>
+        to={`/note?filename=${entry.name}`}>{entry.name}</Link>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { appLocalDataDir, join } from "@tauri-apps/api/path";
+import { join } from "@tauri-apps/api/path";
 import { writeTextFile } from "@tauri-apps/plugin-fs";
 import { useNavigate } from "react-router-dom";
 import { NoteContext } from "../noteContext";
@@ -22,22 +22,21 @@ function Bar() {
   const noteContext = useContext(NoteContext);
 
   function newNote() {
-    navigate('/note?path=&content=')
+    navigate('/note?filename=&content=')
     noteContext?.setName('')
   }
 
   async function saveNote() {
     if (!noteContext) return;
+    const { content, baseDir, fileName, setFileName } = noteContext;
 
-    const { content } = noteContext;
-    const note_name = noteContext.name || crypto.randomUUID().slice(0, 8) + '.md'
+    const note_filename = fileName || crypto.randomUUID().slice(0, 8) + '.md'
 
-    if (!noteContext.name) {
-      noteContext.setName(note_name)
+    if (!fileName) {
+      setFileName(note_filename)
     }
 
-    const notes_path = await join(await appLocalDataDir(), 'notes')
-    const note_path = await join(notes_path, note_name)
+    const note_path = await join(baseDir, note_filename)
 
     await writeTextFile(note_path, content)
   }
