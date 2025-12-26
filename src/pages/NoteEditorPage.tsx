@@ -10,7 +10,11 @@ function NoteEditorPage() {
   const content = searchParams.get('content')
   const noteContext = useContext(NoteContext)
 
-  return (<NoteEditor path={path} content={content} />)
+  useEffect(() => {
+    if (fileName) { noteContext?.setFileName(fileName) }
+    if (baseDir) { noteContext?.setBaseDir(baseDir) }
+  }, [])
+
   return (<NoteEditor fileName={fileName} baseDir={baseDir} content={content} />)
 }
 
