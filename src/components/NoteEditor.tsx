@@ -1,5 +1,5 @@
 import { join } from "@tauri-apps/api/path";
-import { readTextFile } from "@tauri-apps/plugin-fs";
+import { exists, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { useContext, useEffect } from "react";
 import { NoteContext, NoteContextType } from "../noteContext";
 
@@ -13,8 +13,16 @@ function NoteEditor(props: NoteEditorProps) {
 
   async function setContentFromFile() {
     const note_path = await join(props.baseDir || noteContextBaseDir, props.fileName!);
-    setContent(await readTextFile(await join(notes_path, props.path!)))
-    setContent(await readTextFile(note_path))
+
+    try {
+      setContent(await readTextFile(note_path))
+    } catch (error) {
+      if (!(await exists(note_path))) {
+        await writeTextFile(note_path, '')
+      }
+      setContent('')
+    }
+
   }
 
   useEffect(() => {
@@ -26,6 +34,7 @@ function NoteEditor(props: NoteEditorProps) {
   return (
     <div>
       <textarea
+        placeholder="[new note]"
         value={content}
         onChange={(e) => { setContent(e.target.value) }}
       />
