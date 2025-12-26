@@ -10,7 +10,6 @@ type NoteEditorProps = {
 }
 function NoteEditor(props: NoteEditorProps) {
   const { content, setContent, baseDir: noteContextBaseDir } = useContext(NoteContext) as NoteContextType;
-
   async function setContentFromFile() {
     const note_path = await join(props.baseDir || noteContextBaseDir, props.fileName!);
 

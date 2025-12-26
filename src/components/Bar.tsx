@@ -45,9 +45,13 @@ function Bar() {
     navigate('/notes')
   }
 
+  async function showScratchFile() {
+    navigate('/scratch')
+  }
+
   return (
     <div style={styles.toolbar} role='toolbar'>
-      <button style={styles.button}>[scratch]</button>
+      <button style={styles.button} onClick={showScratchFile}>[scratch]</button>
       <button style={styles.button} onClick={saveNote}>[save]</button>
       <button style={styles.button} onClick={newNote}>[new]</button>
       <button style={styles.button} onClick={showNotesList}>[list]</button>

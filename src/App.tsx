@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/note' element={<NoteEditorPage />} />
         <Route path='/notes' element={<List />} />
+        <Route path='/scratch' element={<Navigate to='/note?filename=scratch.md' />} />
       </Route>
     </Routes>
   )
