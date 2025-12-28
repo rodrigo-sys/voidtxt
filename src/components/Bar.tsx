@@ -5,6 +5,7 @@ import { NoteContext } from "../noteContext";
 import { useContext } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
+import { exitApp } from "tauri-plugin-app-exit-api";
 
 const styles = {
   button: {
@@ -65,8 +66,14 @@ function Bar() {
     const cache_bust = `?t=${Date.now()}`
     const image_url = convertFileSrc(image_path) + cache_bust
     document.documentElement.style.setProperty('--app-image', `url("${image_url}")`)
-
   }
+
+  function quitApp() {
+    exitApp().catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div style={styles.toolbar} role='toolbar'>
       <button style={styles.button} onClick={showScratchFile}>[scratch]</button>
@@ -74,7 +81,7 @@ function Bar() {
       <button style={styles.button} onClick={newNote}>[new]</button>
       <button style={styles.button} onClick={showNotesList}>[list]</button>
       <button style={styles.button} onClick={uploadBg}>[upload bg]</button>
-      <button style={styles.button}>[quit]</button>
+      <button style={styles.button} onClick={quitApp}>[quit]</button>
     </div>
   )
 }
