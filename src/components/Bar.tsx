@@ -6,19 +6,7 @@ import { useContext } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { exitApp } from "tauri-plugin-app-exit-api";
-
-const styles = {
-  button: {
-    fontSize: '2.2em', fontWeight: 500
-  },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: 60,
-    marginBottom: 10,
-    marginTop: 5,
-  }
-}
+import '../styles/Bar.css'
 
 function Bar() {
   const navigate = useNavigate()
@@ -26,7 +14,6 @@ function Bar() {
 
   function newNote() {
     navigate('/note?filename=&content=')
-    noteContext?.setName('')
   }
 
   async function saveNote() {
@@ -75,13 +62,13 @@ function Bar() {
   }
 
   return (
-    <div style={styles.toolbar} role='toolbar'>
-      <button style={styles.button} onClick={showScratchFile}>[scratch]</button>
-      <button style={styles.button} onClick={saveNote}>[save]</button>
-      <button style={styles.button} onClick={newNote}>[new]</button>
-      <button style={styles.button} onClick={showNotesList}>[list]</button>
-      <button style={styles.button} onClick={uploadBg}>[upload bg]</button>
-      <button style={styles.button} onClick={quitApp}>[quit]</button>
+    <div className='toolbar' role='toolbar'>
+      <button className='button' onClick={showScratchFile}>[scratch]</button>
+      <button className='button' onClick={saveNote}>[save]</button>
+      <button className='button' onClick={newNote}>[new]</button>
+      <button className='button' onClick={showNotesList}>[list]</button>
+      <button className='button' onClick={uploadBg}>[upload bg]</button>
+      <button className='button' onClick={quitApp}>[quit]</button>
     </div>
   )
 }
