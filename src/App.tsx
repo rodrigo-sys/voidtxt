@@ -19,6 +19,14 @@ function App() {
       document.documentElement.style.setProperty('--app-image', `url("${image_url}")`)
     }
     setBackgroundImage()
+
+    async function createNotesDir() {
+      const notes_path = await join(await appLocalDataDir(), 'notes')
+      if ((await exists(notes_path))) { return }
+      mkdir(notes_path)
+    }
+    createNotesDir()
+
   }, [])
 
   return (
