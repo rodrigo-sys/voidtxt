@@ -1,5 +1,5 @@
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
-import { copyFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { copyFile, readFile, writeFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { useNavigate } from "react-router-dom";
 import { NoteContext } from "../noteContext";
 import { useContext } from "react";
@@ -7,6 +7,7 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { exitApp } from "tauri-plugin-app-exit-api";
 import '../styles/Bar.css'
+import { platform } from "@tauri-apps/plugin-os";
 
 function Bar() {
   const navigate = useNavigate()
@@ -48,10 +49,16 @@ function Bar() {
     if (!file_path) { return }
 
     const image_path = await join(await appLocalDataDir(), 'background-image')
-    await copyFile(file_path, image_path);
+    if (platform() == 'android') {
+      const content = await readFile(file_path);
+      await writeFile(image_path, content);
+    } else {
+      await copyFile(file_path, image_path);
+    }
 
     const cache_bust = `?t=${Date.now()}`
     const image_url = convertFileSrc(image_path) + cache_bust
+
     document.documentElement.style.setProperty('--app-image', `url("${image_url}")`)
   }
 
@@ -69,7 +76,7 @@ function Bar() {
       <button className='button' onClick={showNotesList}>[list]</button>
       <button className='button' onClick={uploadBg}>[upload bg]</button>
       <button className='button' onClick={quitApp}>[quit]</button>
-    </div>
+    </div >
   )
 }
 

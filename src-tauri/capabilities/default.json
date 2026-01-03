@@ -11,6 +11,9 @@
     "fs:allow-app-write-recursive",
     "fs:allow-app-meta-recursive",
     "fs:allow-read-text-file",
+    "fs:allow-document-meta-recursive",
+    "fs:allow-read-file",
+    "fs:allow-write-file",
     "fs:allow-read-dir",
     "fs:allow-exists",
     {
@@ -22,6 +25,7 @@
       ]
     },
     "dialog:default",
-    "app-exit:default"
+    "app-exit:default",
+    "os:default"
   ]
 }
