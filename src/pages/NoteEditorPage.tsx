@@ -11,9 +11,9 @@ function NoteEditorPage() {
   const noteContext = useContext(NoteContext)
 
   useEffect(() => {
-    if (fileName) { noteContext?.setFileName(fileName) }
-    if (baseDir) { noteContext?.setBaseDir(baseDir) }
-  }, [])
+    if (fileName != null) { noteContext?.setFileName(fileName) }
+    if (baseDir != null) { noteContext?.setBaseDir(baseDir) }
+  }, [noteContext])
 
   return (<NoteEditor fileName={fileName} baseDir={baseDir} content={content} />)
 }
