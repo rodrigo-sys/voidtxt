@@ -1,0 +1,13 @@
+.button-bar {
+  font-size: 2.1em;
+  font-weight: 500;
+  color: white;
+  background-color: black;
+  border: solid 2px purple;
+  border-radius: 6px;
+}
+
+.button-bar:hover {
+  border: solid 3px blue;
+  font-weight: 600;
+}

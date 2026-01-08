@@ -1,17 +1,3 @@
-.button {
-  font-size: 2.1em;
-  font-weight: 500;
-  color: white;
-  background-color: black;
-  border: solid 2px purple;
-  border-radius: 6px;
-}
-
-.button:hover {
-  border: solid 3px blue;
-  font-weight: 600;
-}
-
 .toolbar {
   box-sizing: border-box;
   display: flex;
@@ -24,4 +10,5 @@
   padding-top:    21px;
   padding-bottom: 21px;
   border-bottom: solid 1px rgba(99, 99, 999, 0.2);;
+  /* transition: opacity 0.3s ease-in-out; */
 }

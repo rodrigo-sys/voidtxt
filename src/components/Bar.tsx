@@ -8,6 +8,7 @@ import { convertFileSrc } from "@tauri-apps/api/core";
 import { exitApp } from "tauri-plugin-app-exit-api";
 import '../styles/Bar.css'
 import { platform } from "@tauri-apps/plugin-os";
+import ButtonBar from "./ButtonBar";
 
 function Bar() {
   const navigate = useNavigate()
@@ -70,12 +71,12 @@ function Bar() {
 
   return (
     <div className='toolbar' role='toolbar'>
-      <button className='button' onClick={showScratchFile}>[scratch]</button>
-      <button className='button' onClick={saveNote}>[save]</button>
-      <button className='button' onClick={newNote}>[new]</button>
-      <button className='button' onClick={showNotesList}>[list]</button>
-      <button className='button' onClick={uploadBg}>[upload bg]</button>
-      <button className='button' onClick={quitApp}>[quit]</button>
+      <ButtonBar onClick={showScratchFile}>[scratch]</ButtonBar>
+      <ButtonBar onClick={saveNote}>[save]</ButtonBar>
+      <ButtonBar onClick={newNote}>[new]</ButtonBar>
+      <ButtonBar onClick={showNotesList}>[list]</ButtonBar>
+      <ButtonBar onClick={uploadBg}>[upload bg]</ButtonBar>
+      <ButtonBar onClick={quitApp}>[quit]</ButtonBar>
     </div >
   )
 }
