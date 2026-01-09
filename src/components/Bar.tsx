@@ -56,46 +56,34 @@ function Bar() {
     })
   }
 
-  async function saveNote({ promptForName = false }: { promptForName?: boolean } = {}): Promise<void> {
+  async function saveNote(): Promise<void> {
     if (!noteContext) return;
     const { content, baseDir, fileName, setFileName } = noteContext;
 
     const hasFileName = !!fileName;
-    const shouldAddExtension = !hasFileName || promptForName;
-    const shouldUpdateContext = !hasFileName;
-
+    
     let note_filename: string;
 
-    if (promptForName) {
-      if (hasFileName) {
-        const extension = await extname(fileName);
-        const basename_without_ext = await basename(fileName, '.' + extension);
-        promptContext?.setPromptText(basename_without_ext);
-      }
+    if (!hasFileName) {
       note_filename = await promptContext?.showPromptAsync() || '';
+      if (note_filename) {
+        note_filename += '.md';
+        setFileName(note_filename);
+      }
     } else {
-      note_filename = fileName || crypto.randomUUID().slice(0, 8);
+      note_filename = fileName;
     }
 
-    if (shouldAddExtension) {
-      note_filename += '.md';
+    if (note_filename) {
+      const note_path = await join(baseDir, note_filename);
+      await writeTextFile(note_path, content);
     }
-
-    if (shouldUpdateContext) {
-      setFileName(note_filename)
-    }
-
-    const note_path = await join(baseDir, note_filename)
-    await writeTextFile(note_path, content)
   }
 
   return (
     <div className='toolbar' role='toolbar'>
       <ButtonBar onClick={showScratchFile}>[scratch]</ButtonBar>
-      <ButtonBar
-        onClick={saveNote}
-        onLongPress={() => saveNote({ promptForName: true })}
-      >
+      <ButtonBar onClick={saveNote}>
         [save]
       </ButtonBar>
       <ButtonBar onClick={newNote}>[new]</ButtonBar>
