@@ -5,6 +5,7 @@
   background-color: black;
   border: solid 2px purple;
   border-radius: 6px;
+  user-select: none;
 }
 
 .button-bar:hover {
