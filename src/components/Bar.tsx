@@ -1,13 +1,10 @@
-import { appLocalDataDir, extname, basename, join } from "@tauri-apps/api/path";
-import { copyFile, readFile, writeFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { basename, extname, join } from "@tauri-apps/api/path";
+import { remove, rename, writeTextFile } from "@tauri-apps/plugin-fs";
 import { useNavigate } from "react-router-dom";
 import { NoteContext } from "../noteContext";
 import { useContext } from "react";
-import { open } from "@tauri-apps/plugin-dialog";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { exitApp } from "tauri-plugin-app-exit-api";
 import '../styles/Bar.css'
-import { platform } from "@tauri-apps/plugin-os";
 import { PromptContext } from "../contexts/PromptContext";
 import ButtonBar from "./ButtonBar";
 
@@ -24,31 +21,6 @@ function Bar() {
     navigate('/notes')
   }
 
-  async function showScratchFile() {
-    navigate('/scratch')
-  }
-
-  async function uploadBg() {
-    const file_path = await open({
-      multiple: false,
-      directory: false,
-    })
-
-    if (!file_path) { return }
-
-    const image_path = await join(await appLocalDataDir(), 'background-image')
-    if (platform() == 'android') {
-      const content = await readFile(file_path);
-      await writeFile(image_path, content);
-    } else {
-      await copyFile(file_path, image_path);
-    }
-
-    const cache_bust = `?t=${Date.now()}`
-    const image_url = convertFileSrc(image_path) + cache_bust
-
-    document.documentElement.style.setProperty('--app-image', `url("${image_url}")`)
-  }
 
   function quitApp() {
     exitApp().catch(error => {
@@ -82,13 +54,9 @@ function Bar() {
 
   return (
     <div className='toolbar' role='toolbar'>
-      <ButtonBar onClick={showScratchFile}>[scratch]</ButtonBar>
-      <ButtonBar onClick={saveNote}>
-        [save]
-      </ButtonBar>
+      <ButtonBar onClick={saveNote}>[save]</ButtonBar>
       <ButtonBar onClick={newNote}>[new]</ButtonBar>
       <ButtonBar onClick={showNotesList}>[list]</ButtonBar>
-      <ButtonBar onClick={uploadBg}>[upload bg]</ButtonBar>
       <ButtonBar onClick={quitApp}>[quit]</ButtonBar>
     </div >
   )
