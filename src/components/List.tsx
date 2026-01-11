@@ -1,10 +1,12 @@
 import { DirEntry, readDir, stat } from "@tauri-apps/plugin-fs"
 import { join, appLocalDataDir, extname, basename } from "@tauri-apps/api/path"
-import { CSSProperties, useEffect, useState } from "react"
+import { CSSProperties, useEffect, useState, useRef } from "react"
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { Link } from "react-router-dom"
 
 export function List() {
   const [notes_entries, setNotesEntries] = useState<Array<DirEntry> | null>(null)
+  const parentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     async function getNotesEntries() {
@@ -28,21 +30,52 @@ export function List() {
     return entries_with_time.sort((a, b) => b.mtime - a.mtime)
   }
 
+  const filteredEntries = notes_entries?.filter(entry => entry.isFile) || []
+
+  const virtualizer = useVirtualizer({
+    count: filteredEntries.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 50,
+  })
+
   return (
-    <div style={{
-      overflow: 'auto',
-      height: '60vh',
-      width: '80%',
-      margin: '0 auto',
-      marginTop: '30px',
-    }}>
-      {notes_entries !== null &&
-        notes_entries.filter(entry => entry.isFile).
-          map((entry, i) =>
-            <NoteEntry key={i} entry={entry} />
+    <div
+      ref={parentRef}
+      style={{
+        height: '60vh',
+        width: '80%',
+        margin: '0 auto',
+        marginTop: '30px',
+        overflow: 'auto',
+      }}
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative',
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => {
+          const entry = filteredEntries[virtualItem.index]
+          return (
+            <div
+              key={virtualItem.key}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: `${virtualItem.size}px`,
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+            >
+              <NoteEntry entry={entry} />
+            </div>
           )
-      }
-    </div >
+        })}
+      </div>
+    </div>
   )
 }
 
