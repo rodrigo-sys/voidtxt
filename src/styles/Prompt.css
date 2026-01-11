@@ -32,3 +32,7 @@
   /* max-width: 495px; */
   /* max-width: 591px; */
 }
+
+.prompt-input:focus {
+  outline: none;
+}
