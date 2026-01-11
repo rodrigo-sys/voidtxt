@@ -7,6 +7,7 @@ import { exitApp } from "tauri-plugin-app-exit-api";
 import '../styles/Bar.css'
 import { PromptContext } from "../contexts/PromptContext";
 import ButtonBar from "./ButtonBar";
+import { ask } from "@tauri-apps/plugin-dialog";
 
 function Bar() {
   const navigate = useNavigate()
@@ -52,10 +53,26 @@ function Bar() {
     }
   }
 
+  async function deleteNote() {
+    if (!noteContext) { return; }
+
+    const confirmation = await ask('Are you sure you want to delete this note? This action cannot be undone.', {
+      title: 'Remove note',
+      kind: 'warning',
+    });
+
+    if (confirmation) {
+      const note_path = await join(noteContext.baseDir, noteContext.fileName);
+      await remove(note_path)
+    }
+
+    navigate('/note?filename=&content=')
+  }
   return (
     <div className='toolbar' role='toolbar'>
       <ButtonBar onClick={saveNote}>[save]</ButtonBar>
       <ButtonBar onClick={newNote}>[new]</ButtonBar>
+      <ButtonBar onClick={deleteNote}>[del]</ButtonBar>
       <ButtonBar onClick={showNotesList}>[list]</ButtonBar>
       <ButtonBar onClick={quitApp}>[quit]</ButtonBar>
     </div >
