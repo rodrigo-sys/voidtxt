@@ -68,11 +68,55 @@ function Bar() {
 
     navigate('/note?filename=&content=')
   }
+
+  async function renameNote() {
+    // Validate that we have a note to rename
+    if (!noteContext) {
+      console.warn('No note context available');
+      return;
+    }
+
+    if (!noteContext.fileName) {
+      console.warn('Current note has no filename to rename');
+      return;
+    }
+
+    try {
+      // Extract file extension and base name
+      const fileExtension = await extname(noteContext.fileName);
+      const baseFileName = await basename(noteContext.fileName, '.' + fileExtension);
+
+      // Set up rename prompt with current name (without extension)
+      promptContext?.setPromptText(baseFileName);
+
+      // Get new filename from user
+      const newBaseName = await promptContext?.showPromptAsync() || '';
+      if (!newBaseName.trim()) {
+        return; // User cancelled or entered empty name
+      }
+
+      // Reconstruct full filename with original extension
+      const newFileName = `${newBaseName}.${fileExtension}`;
+
+      // Build file paths
+      const currentFilePath = await join(noteContext.baseDir, noteContext.fileName);
+      const newFilePath = await join(noteContext.baseDir, newFileName);
+
+      // Perform the rename operation
+      await rename(currentFilePath, newFilePath);
+
+    } catch (error) {
+      console.error('Failed to rename note:', error);
+      // Optional: Could show error to user via prompt system
+    }
+  }
+
   return (
     <div className='toolbar' role='toolbar'>
       <ButtonBar onClick={saveNote}>[save]</ButtonBar>
       <ButtonBar onClick={newNote}>[new]</ButtonBar>
       <ButtonBar onClick={deleteNote}>[del]</ButtonBar>
+      <ButtonBar onClick={renameNote}>[rename]</ButtonBar>
       <ButtonBar onClick={showNotesList}>[list]</ButtonBar>
       <ButtonBar onClick={quitApp}>[quit]</ButtonBar>
     </div >
