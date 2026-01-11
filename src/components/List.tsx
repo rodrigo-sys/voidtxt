@@ -1,5 +1,5 @@
 import { DirEntry, readDir, stat } from "@tauri-apps/plugin-fs"
-import { join, appLocalDataDir } from "@tauri-apps/api/path"
+import { join, appLocalDataDir, extname, basename } from "@tauri-apps/api/path"
 import { CSSProperties, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -40,13 +40,25 @@ export function List() {
   )
 }
 
+async function getBaseName(entry: DirEntry) {
+  const extension = await extname(entry.name);
+  const baseName = await basename(entry.name, '.' + extension);
+  return baseName;
+}
+
 function NoteEntry({ entry, style }: { entry: DirEntry, style?: CSSProperties }) {
   const default_style = { fontSize: '30px', color: 'white', textDecoration: 'none' }
+  const [displayName, setDisplayName] = useState('');
+
+  useEffect(() => {
+    getBaseName(entry).then(setDisplayName);
+  }, [entry])
+
   return (
     <div>
       <Link
         style={style || default_style}
-        to={`/note?filename=${entry.name}`}>{entry.name}</Link>
+        to={`/note?filename=${entry.name}`}>{displayName}</Link>
     </div>
   )
 }
