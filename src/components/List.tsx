@@ -29,7 +29,13 @@ export function List() {
   }
 
   return (
-    <div>
+    <div style={{
+      overflow: 'auto',
+      height: '60vh',
+      width: '80%',
+      margin: '0 auto',
+      marginTop: '30px',
+    }}>
       {notes_entries !== null &&
         notes_entries.filter(entry => entry.isFile).
           map((entry, i) =>
