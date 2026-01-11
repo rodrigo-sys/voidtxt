@@ -8,7 +8,7 @@ import RootLayout from "./pages/layouts/RootLayout";
 import { List } from "./components/List";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
-import { exists } from "@tauri-apps/plugin-fs";
+import { exists, mkdir } from "@tauri-apps/plugin-fs";
 
 function App() {
   useEffect(() => {
