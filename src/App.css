@@ -14,6 +14,7 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(var(--bg-blur, 10px));
+  transform: scale(1.1);
 }
 
 textarea {
