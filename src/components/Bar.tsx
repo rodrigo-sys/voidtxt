@@ -8,6 +8,7 @@ import '../styles/Bar.css'
 import { PromptContext } from "../contexts/PromptContext";
 import ButtonBar from "./ButtonBar";
 import { ask } from "@tauri-apps/plugin-dialog";
+import { ListIcon, PencilLine, Plus, Save, Trash2, X } from "lucide-react";
 
 function Bar() {
   const navigate = useNavigate()
@@ -113,12 +114,24 @@ function Bar() {
 
   return (
     <div className='toolbar' role='toolbar'>
-      <ButtonBar onClick={saveNote}>[save]</ButtonBar>
-      <ButtonBar onClick={newNote}>[new]</ButtonBar>
-      <ButtonBar onClick={deleteNote}>[del]</ButtonBar>
-      <ButtonBar onClick={renameNote}>[rename]</ButtonBar>
-      <ButtonBar onClick={showNotesList}>[list]</ButtonBar>
-      <ButtonBar onClick={quitApp}>[quit]</ButtonBar>
+      <ButtonBar onClick={saveNote} aria-label="Save note">
+        <Save />
+      </ButtonBar>
+      <ButtonBar onClick={newNote} aria-label="Create new note">
+        <Plus />
+      </ButtonBar>
+      <ButtonBar onClick={deleteNote} aria-label="Delete note">
+        <Trash2 />
+      </ButtonBar>
+      <ButtonBar onClick={renameNote} aria-label="Rename note">
+        <PencilLine />
+      </ButtonBar>
+      <ButtonBar onClick={showNotesList} aria-label="Show notes list">
+        <ListIcon />
+      </ButtonBar>
+      <ButtonBar onClick={quitApp} aria-label="Quit application">
+        <X />
+      </ButtonBar>
     </div >
   )
 }

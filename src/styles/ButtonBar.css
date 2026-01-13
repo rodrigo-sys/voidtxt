@@ -12,3 +12,8 @@
   border: solid 3px blue;
   font-weight: 600;
 }
+
+.button-bar svg[class*="lucide"] {
+  padding-block: 11px 2px;
+  padding-inline: 9px;
+}
