@@ -7,7 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "clean": "cargo clean --manifest-path src-tauri/Cargo.toml",
+    "android-share": "cd \"$(npm prefix)\" && qrshare src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk",
+    "android-build": "pnpm tauri android build --apk true",
+    "android-build-share": "pnpm tauri android build --apk true && pnpm android-share",
+    "android-clean-build": "pnpm clean && pnpm android-build",
+    "android-open": "pnpm tauri android dev --open",
+    "android-build-debug": "pnpm tauri android build --debug"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.13.18",
