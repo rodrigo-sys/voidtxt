@@ -26,6 +26,16 @@ function App() {
     }
     createNotesDir()
 
+    if (import.meta.env.DEV) {
+      async function addSamplesNotes() {
+        const { createSampleNotes, clearNotesDirectory } = await import("./utils/dev/dev");
+        await clearNotesDirectory();
+        await createSampleNotes();
+        return
+      }
+      addSamplesNotes();
+    }
+
   }, [])
 
   return (
