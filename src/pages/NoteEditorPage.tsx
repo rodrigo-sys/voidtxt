@@ -13,7 +13,7 @@ function NoteEditorPage() {
   useEffect(() => {
     if (fileName != null) { noteContext?.setFileName(fileName) }
     if (baseDir != null) { noteContext?.setBaseDir(baseDir) }
-  }, [noteContext])
+  }, [fileName, baseDir])
 
   return (<NoteEditor fileName={fileName} baseDir={baseDir} content={content} />)
 }
