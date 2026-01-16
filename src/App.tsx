@@ -10,8 +10,6 @@ import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import { exists, mkdir } from "@tauri-apps/plugin-fs";
 
 function App() {
-  const navigate = useNavigate();
-
   useEffect(() => {
     async function setBackgroundImage() {
       const image_path = await join(await appLocalDataDir(), 'background-image')
@@ -27,7 +25,10 @@ function App() {
       mkdir(notes_path)
     }
     createNotesDir()
+  }, [])
 
+  const navigate = useNavigate();
+  useEffect(() => {
     if (import.meta.env.DEV) {
       async function addSamplesNotes() {
         const { createSampleNotes, clearNotesDirectory } = await import("./utils/dev/dev");
@@ -43,8 +44,7 @@ function App() {
       }
       setupShortcuts();
     }
-
-  }, [])
+  }, [navigate])
 
   return (
     <Routes>
