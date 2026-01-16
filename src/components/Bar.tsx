@@ -57,6 +57,9 @@ function Bar() {
   async function deleteNote() {
     if (!noteContext) { return; }
 
+    const hasFileName = !!noteContext.fileName;
+    if (!hasFileName) { return }
+
     const confirmation = await ask('Are you sure you want to delete this note? This action cannot be undone.', {
       title: 'Remove note',
       kind: 'warning',
