@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NoteEditorPage from "./pages/NoteEditorPage";
@@ -10,6 +10,8 @@ import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import { exists, mkdir } from "@tauri-apps/plugin-fs";
 
 function App() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function setBackgroundImage() {
       const image_path = await join(await appLocalDataDir(), 'background-image')
@@ -34,6 +36,12 @@ function App() {
         return
       }
       addSamplesNotes();
+
+      async function setupShortcuts() {
+        const { setupDevKeyboardShortcuts } = await import('./utils/dev/keyboardShortcuts');
+        await setupDevKeyboardShortcuts(navigate);
+      }
+      setupShortcuts();
     }
 
   }, [])
@@ -41,7 +49,7 @@ function App() {
   return (
     <Routes>
       <Route element={<RootLayout />}>
-        <Route path='/' element={<NoteEditorPage/>} />
+        <Route path='/' element={<NoteEditorPage />} />
         <Route path='/note' element={<NoteEditorPage />} />
         <Route path='/notes' element={<List />} />
         <Route path='/scratch' element={<Navigate to='/note?filename=scratch.md' />} />
