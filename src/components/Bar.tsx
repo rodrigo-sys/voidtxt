@@ -109,6 +109,9 @@ function Bar() {
       // Perform the rename operation
       await rename(currentFilePath, newFilePath);
 
+      // Update note context
+      noteContext.setFileName(newFilePath)
+
     } catch (error) {
       console.error('Failed to rename note:', error);
       // Optional: Could show error to user via prompt system
