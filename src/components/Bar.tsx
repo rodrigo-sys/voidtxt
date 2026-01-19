@@ -65,10 +65,13 @@ function Bar() {
       kind: 'warning',
     });
 
-    if (confirmation) {
-      const note_path = await join(noteContext.baseDir, noteContext.fileName);
-      await remove(note_path)
-    }
+    if (!confirmation) { return; }
+
+    const note_path = await join(noteContext.baseDir, noteContext.fileName);
+    await remove(note_path)
+
+    noteContext.setContent('')
+    noteContext.setFileName('')
 
     navigate('/note?filename=&content=')
   }
