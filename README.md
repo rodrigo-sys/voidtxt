@@ -48,4 +48,5 @@ pnpm tauri build
 
 ## 📝 TODOs
 - Add instructions and bundles for mobile
+- Create app icon
 
