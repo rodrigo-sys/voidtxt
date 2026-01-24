@@ -15,14 +15,16 @@ https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
 
 ## 📦 Installation
 
-1. Visit the [Releases page](https://github.com/rodrigo-sys/voidtxt/releases).
-2. Download the binary for your operating system.
-3. Move the file to a directory included in your system PATH:
-   - Windows: `%LOCALAPPDATA%\Microsoft\WindowsApps`
-   - Linux/macOS: `$HOME/.local/bin`  
-     *(you may need to create this directory and add it to your PATH manually if it doesn’t exist)*
-
-Alternatively, you can simply open the downloaded file directly without moving it, though you’ll need to run it from its folder each time.
+1. Go to the [Releases page](https://github.com/rodrigo-sys/voidtxt/releases).
+2. Download the file for your operating system:
+   - **Windows:** [`-setup.exe`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt_0.1.0_x64-setup.exe) or [`.msi`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt_0.1.0_x64_en-US.msi)
+   - **macOS:** [`.dmg`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt_0.1.0_x64.dmg)
+   - **Linux:** [`.deb`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt_0.1.0_amd64.deb), [`.rpm`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt-0.1.0-1.x86_64.rpm), or [`.AppImage`](https://github.com/rodrigo-sys/voidtxt/releases/download/app-v0.1.0/voidtxt_0.1.0_amd64.AppImage)
+3. Open the file:
+   - Follow the installation steps for installers.
+   - For **`.AppImage`**:
+     - You can open it directly, or
+     - Move it to a directory in your `PATH` (for example, `$HOME/.local/bin`) if you want to run it from the command line.
 
 ---
 
@@ -45,7 +47,5 @@ pnpm tauri build
 ```
 
 ## 📝 TODOs
-- User friendly installation  
-  setups, installation scripts
 - Add instructions and bundles for mobile
 
