@@ -1,11 +1,18 @@
 # void.txt
 
+<p align="center">
+  <a href="#features" style="margin: 0 10px;">Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#build">build</a>
+</p>
+
+
 **A note‑taking app built with Tauri.**
 
 https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
 
----
-
+<div id='features'></h2>
+   
 ## ✨ Features
 - Cross‑platform (Windows, Linux, macOS)
 - Clean interface
@@ -13,6 +20,8 @@ https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
 
 ---
 
+<div id='installation'></h2>
+   
 ## 📦 Installation
 
 1. Go to the [Releases page](https://github.com/rodrigo-sys/voidtxt/releases).
@@ -28,6 +37,8 @@ https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
 
 ---
 
+<div id='build'></h2>
+   
 ## 🔨 Build from Source
 
 ### 📋 Requirements
