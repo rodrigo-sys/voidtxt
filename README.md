@@ -3,7 +3,7 @@
 <p align="center">
   <a href="#features" style="margin: 0 10px;">Features</a> •
   <a href="#installation">Installation</a> •
-  <a href="#build">build</a>
+  <a href="#build">Build</a>
 </p>
 
 
