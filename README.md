@@ -1,15 +1,18 @@
 # void.txt
 
+**A note‑taking app built with Tauri.**
+
+https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
+
+---
+
 <p align="center">
   <a href="#features" style="margin: 0 10px;">Features</a> •
   <a href="#installation">Installation</a> •
   <a href="#build">Build</a>
 </p>
 
-
-**A note‑taking app built with Tauri.**
-
-https://github.com/user-attachments/assets/dabbe82e-336a-4db7-b3b3-e5d8be5d0725
+---
 
 <div id='features'></h2>
    
