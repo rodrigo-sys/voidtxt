@@ -4,6 +4,8 @@
   <a href="#build">Build</a>
 </p>
 
+---
+
 # void.txt
 
 **A note‑taking app built with Tauri.**
